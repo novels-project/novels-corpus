@@ -37,7 +37,8 @@ following schema:
 - `internet_archive_identifier` Internet Archive id (e.g., `glenarvon01lambc`)
 - `volume` integer
 - `volume_count` integer (`volume_count` must be greater than or equal to `volume`)
-- `date_entered` `%Y-%m-%d` of metadata creation
+- `date_created` `%Y-%m-%d` of metadata creation
+- `date_updated` `%Y-%m-%d` of last metadata update
 - `sha1` hex-encoded SHA1 of the text file in the directory
 - `extra_info` (optionally empty) dictionary of non-essential information
 
