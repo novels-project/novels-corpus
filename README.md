@@ -28,8 +28,9 @@ Each directory shall contain two files:
 
 The SHA1 of the text file is stored in `metadata.json`.
 
-## Volume metadata
+### Metadata
 
+Metadata is associated with each volume that links it to a work.
 `metadata.json` contains a JSON-encoded dictionary which shall conform to the
 following schema:
 
@@ -48,3 +49,16 @@ The text used is the best available facsimile of the original edition
 referenced in `works.csv`. The text may be derived from a subsequent edition
 (e.g., the second edition) if the subsequent edition is the only one available
 or if the scan is of considerably higher quality.
+
+### Texts
+
+A plaintext version of each volume is available. This text is typically the
+plaintext derived from Optical Character Recogntion (OCR), trimmed of OCR'd
+library stamps and other extraneous material which occurs at the beginning and
+ending of the scan. In recognition that this trimming process is not easily
+reproducible, *patches* will be provided in a future version that specifies how
+to produce the version contained in the repository from the original OCR.
+
+In other cases, particularly when the scan is of very low quality, the
+plaintext version may be derived from another source, including manual entry.
+All these cases are recorded in `metadata.json`.
