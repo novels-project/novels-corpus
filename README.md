@@ -42,3 +42,8 @@ following schema:
 - `extra_info` (optionally empty) dictionary of non-essential information
 
 The following fields uniquely identify a record: `work_id` and `volume`
+
+The text used is the best available facsimile of the original edition
+referenced in `works.csv`. The text may be derived from a subsequent edition
+(e.g., the second edition) if the subsequent edition is the only one available
+or if the scan is of considerably higher quality.
