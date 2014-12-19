@@ -62,3 +62,13 @@ to produce the version contained in the repository from the original OCR.
 In other cases, particularly when the scan is of very low quality, the
 plaintext version may be derived from another source, including manual entry.
 All these cases are recorded in `metadata.json`.
+
+## Non-free Volumes
+
+The `nonfree` directory contains volumes and associated plaintexts that are not
+available on the Internet Archive. The `metadata.json` conforms to a schema
+identical to the one described above but `internet_archive_identifier` is
+replaced by `nonfree_identifier`.
+
+If the original source of a plaintext is HTML, a plaintext version is generated
+using  [html2text](http://www.mbayer.de/html2text/)  version 1.3.2a.
