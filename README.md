@@ -1,4 +1,4 @@
-# Novels Project Library
+# Novels Project Corpus
 
 This repository contains all data relevant to the Novels Project. It is under
 version control so all changes are recorded.
