@@ -17,7 +17,7 @@ some placeholders where data has only been partially entered.
 The following fields shall uniquely identify a record:
 
 - `id`
-- `source` and `source_identifier`
+- `source` and `source_id`
 
 ## Volumes
 
@@ -34,7 +34,7 @@ The SHA1 of the text file is stored in `metadata.json`.
 following schema:
 
 - `work_id` the work with which this volume is associated
-- `internet_archive_identifier` Internet Archive id (e.g., `glenarvon01lambc`)
+- `internet_archive_id` Internet Archive id (e.g., `glenarvon01lambc`)
 - `volume` integer
 - `volume_count` integer (`volume_count` must be greater than or equal to `volume`)
 - `date_created` `%Y-%m-%d` of metadata creation
