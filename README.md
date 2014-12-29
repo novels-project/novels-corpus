@@ -8,6 +8,35 @@ version control so all changes are recorded.
   unimportant, the file `metadata.json` in each directory describes the
   relationship between the volume and a *work*.
 
+## Quickstart
+
+Work metadata, volume metadata, and plaintext are exposed via a simple
+read-only REST server. This server can be run with the following command
+(Python 3.4 and `aiohttp` required):
+
+    python main.py
+
+The API has two endpoints:
+
+- `/work` (metadata for all works)
+- `/work/<id>`
+- `/text/<sha1>`
+
+For example, the novel [Glenarvon](https://en.wikipedia.org/wiki/Glenarvon) has
+id `1235` and metadata concerning it and a list of associated volumes may be
+retrieved with:
+
+    curl http://127.0.0.1:5000/work/1235
+
+As the plaintext of an edition of this novel is available, a list of associated
+texts and their SHA-1 hashes is given in the response.  The plain text version
+of the third volume has hash `40d2491e07dd2f1c71413b65bc551804cb93b0f3` and may
+be retrieved with:
+
+    curl -s http://127.0.0.1:5000/text/40d2491e07dd2f1c71413b65bc551804cb93b0f3
+
+That's all there is!
+
 ## Works
 
 The vast majority of records in `works.csv` are from the two volumes edited by
