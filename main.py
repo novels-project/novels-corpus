@@ -24,7 +24,7 @@ for volumes_dir in ['volumes', 'nonfree']:
     for dirpath, dirnames, filenames in os.walk(volumes_dir):
         for fn in filenames:
             if fn == 'metadata.json':
-                metadata = json.load(open(os.path.join(dirpath, fn)))
+                metadata = json.load(open(os.path.join(dirpath, fn), encoding='utf8'))
                 work_id = int(metadata['work_id'])
                 _volumes[work_id] += [metadata]
                 # sort volumes in ascending order by volume number
@@ -37,7 +37,7 @@ for volumes_dir in ['volumes', 'nonfree']:
 ############################################################################
 # load work metadata stored on disk into memory
 ############################################################################
-works = collections.OrderedDict((int(d['id']), d) for d in csv.DictReader(open('works.csv')))
+works = collections.OrderedDict((int(d['id']), d) for d in csv.DictReader(open('works.csv', encoding='utf8')))
 # insert volumes into relevant work dictionary
 for work in works.values():
     # ensure work_id is an integer
@@ -69,7 +69,7 @@ def text(request):
     if sha1 not in texts:
         return web.HTTPNotFound()
     else:
-        text = open(texts[sha1]).read()
+        text = open(texts[sha1], encoding='utf8').read()
     return web.Response(text=text)
 
 
