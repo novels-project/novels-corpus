@@ -74,8 +74,15 @@ def text(request):
 
 
 @asyncio.coroutine
+def index(request):
+    text = "See https://novels.io for more information."
+    return web.Response(text=text)
+
+
+@asyncio.coroutine
 def init(loop):
     app = web.Application(loop=loop)
+    app.router.add_route('GET', '/', index)
     app.router.add_route('GET', '/work/', work)
     app.router.add_route('GET', '/work/{id}', work)
     app.router.add_route('GET', '/text/{sha1}', text)
