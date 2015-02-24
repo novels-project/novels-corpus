@@ -101,3 +101,7 @@ replaced by `nonfree_identifier`.
 
 If the original source of a plaintext is HTML, a plaintext version is generated
 using  [html2text](http://www.mbayer.de/html2text/)  version 1.3.2a.
+
+## TODO
+
+- Validate all `metadata.json` files using JSON Schema.
