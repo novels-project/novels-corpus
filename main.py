@@ -43,7 +43,7 @@ def fetch_texts():
     for volumes_dir in ['volumes', 'nonfree']:
         for dirpath, dirnames, filenames in os.walk(volumes_dir):
             for fn in filenames:
-                if os.path.splitext(fn)[-1] == '.txt':
+                if os.path.splitext(fn)[-1].startswith('.txt'):
                     filename = os.path.join(dirpath, fn)
                     sha1 = hashlib.sha1(open(filename, 'rb').read()).hexdigest()
                     texts[sha1] = filename
