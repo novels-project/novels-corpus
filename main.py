@@ -38,9 +38,20 @@ ids_url = 'https://github.com/novels-project/identifiers/raw/master/novels-proje
 # load volume metadata stored on disk into memory, indexed by work id
 # index text filenames by sha1sum
 ############################################################################
-def fetch_volumes():
-    volumes = collections.defaultdict(list)
+def fetch_texts():
     texts = {}
+    for volumes_dir in ['volumes', 'nonfree']:
+        for dirpath, dirnames, filenames in os.walk(volumes_dir):
+            for fn in filenames:
+                if os.path.splitext(fn)[-1] == '.txt':
+                    filename = os.path.join(dirpath, fn)
+                    sha1 = hashlib.sha1(open(filename, 'rb').read()).hexdigest()
+                    texts[sha1] = filename
+    return texts
+
+def fetch_volumes():
+    # NB: metadata.json contains sha1 of relevant text
+    volumes = collections.defaultdict(list)
     for volumes_dir in ['volumes', 'nonfree']:
         for dirpath, dirnames, filenames in os.walk(volumes_dir):
             for fn in filenames:
@@ -50,10 +61,6 @@ def fetch_volumes():
                     volumes[work_id] += [metadata]
                     # sort volumes in ascending order by volume number
                     volumes[work_id].sort(key=operator.itemgetter('volume'))
-                elif os.path.splitext(fn)[-1] == '.txt':
-                    filename = os.path.join(dirpath, fn)
-                    sha1 = hashlib.sha1(open(filename, 'rb').read()).hexdigest()
-                    texts[sha1] = filename
     return volumes
 
 ############################################################################
@@ -120,17 +127,23 @@ works = fetch_works()
 inject_volumes(fetch_volumes(), works)
 
 ############################################################################
+# load sha1->filename mapping into memory
+############################################################################
+# NB: texts is a global variable
+texts = fetch_texts()
+
+############################################################################
 # endpoints
 ############################################################################
 @asyncio.coroutine
 def work(request):
     if request.match_info.get('id', None) is None:
-        return aiohttp.web.Response(text=json.dumps(works, ensure_ascii=False, indent=2))
+        return aiohttp.web.Response(text=json.dumps(works, ensure_ascii=False, indent=2, sort_keys=True))
     else:
         id = int(request.match_info['id'])
         if id not in works:
             return aiohttp.web.HTTPNotFound
-        return aiohttp.web.Response(text=json.dumps(works[id], ensure_ascii=False, indent=2))
+        return aiohttp.web.Response(text=json.dumps(works[id], ensure_ascii=False, indent=2, sort_keys=True))
 
 @asyncio.coroutine
 def text(request):
