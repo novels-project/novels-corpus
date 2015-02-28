@@ -3,10 +3,11 @@
 This repository contains all data relevant to the Novels Project. It is under
 version control so all changes are recorded.
 
-- `works.csv` contains records of *works* identified by `id`.
 - Each directory in `volumes/` corresponds to a *volume*. The directory name is
   unimportant, the file `metadata.json` in each directory describes the
   relationship between the volume and a *work*.
+- The canonical identifiers for bibliographic records ("novels project identifiers") of
+  works (not volumes) are available in a separate repository: [novels-project/identifiers](https://github.com/novels-project/identifiers).
 
 ## Quickstart
 
