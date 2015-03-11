@@ -56,7 +56,11 @@ def fetch_volumes():
         for dirpath, dirnames, filenames in os.walk(volumes_dir):
             for fn in filenames:
                 if fn == 'metadata.json':
-                    metadata = json.load(open(os.path.join(dirpath, fn), encoding='utf8'))
+                    try:
+                        metadata = json.load(open(os.path.join(dirpath, fn), encoding='utf8'))
+                    except ValueError:
+                        logger.critical("Failed to load {}".format(os.path.join(dirpath, fn)))
+                        raise
                     work_id = int(metadata['work_id'])
                     volumes[work_id] += [metadata]
                     # sort volumes in ascending order by volume number
