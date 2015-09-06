@@ -1,0 +1,3 @@
+#!/bin/sh
+# project-specific requirements
+apk-install bash
